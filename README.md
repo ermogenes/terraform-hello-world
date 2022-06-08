@@ -20,7 +20,7 @@ Obtenha uma chave de acesso na AWS.
 
 Selecione uma região, um AMI e um tipo de instância.
 
-⚠ _Os códigos de AMI e os tipos de instância disponíveis mudam por região. Consulte na AWs Console._
+⚠ _Os códigos de AMI e os tipos de instância disponíveis mudam por região. Consulte na AWS Console._
 
 ```
 provider "aws" {
