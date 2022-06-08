@@ -216,7 +216,7 @@ Terraform has compared your real infrastructure against your configuration and f
 
 Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
 ```
-`
+
 ## Modificando o recurso
 
 Vamos adicionar uma tag ao recurso:
