@@ -383,3 +383,15 @@ Destroy complete! Resources: 1 destroyed.
 ```
 
 Outra maneira de fazer isso é comentando ou excluindo a declaração do recurso e efetuando o `apply`.
+
+## Pulando a confirmação
+
+Pode-se utilizar o argumento `--auto-approve` para pular a confirmação.
+
+```bash
+terraform apply --auto-approve
+```
+
+```bash
+terraform destroy --auto-approve
+```
