@@ -264,3 +264,122 @@ Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 ```
 
 A tag `Name` representa o nome do recurso para exibição no AWS Console.
+
+## Removendo os recursos
+
+Para destruir todos os recursos declarados, use:
+
+```bash
+terraform destroy
+```
+
+Será exibida a lista de recursos a serem destruídos, e solicitada uma confirmação.
+
+```
+aws_instance.ec2_tf_hello-world: Refreshing state... [id=i-0e48e99596d5ec5e5]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # aws_instance.ec2_tf_hello-world will be destroyed
+  - resource "aws_instance" "ec2_tf_hello-world" {
+      - ami                                  = "ami-0022f774911c1d690" -> null
+      - arn                                  = "arn:aws:ec2:us-east-1:013135298158:instance/i-0e48e99596d5ec5e5" -> null
+      - associate_public_ip_address          = true -> null
+      - availability_zone                    = "us-east-1a" -> null
+      - cpu_core_count                       = 1 -> null
+      - cpu_threads_per_core                 = 1 -> null
+      - disable_api_termination              = false -> null
+      - ebs_optimized                        = false -> null
+      - get_password_data                    = false -> null
+      - hibernation                          = false -> null
+      - id                                   = "i-0e48e99596d5ec5e5" -> null
+      - instance_initiated_shutdown_behavior = "stop" -> null
+      - instance_state                       = "running" -> null
+      - instance_type                        = "t2.micro" -> null
+      - ipv6_address_count                   = 0 -> null
+      - ipv6_addresses                       = [] -> null
+      - monitoring                           = false -> null
+      - primary_network_interface_id         = "eni-055b4f422876a6d64" -> null
+      - private_dns                          = "ip-172-31-22-15.ec2.internal" -> null
+      - private_ip                           = "172.31.22.15" -> null
+      - public_dns                           = "ec2-54-173-68-148.compute-1.amazonaws.com" -> null
+      - public_ip                            = "54.173.68.148" -> null
+      - secondary_private_ips                = [] -> null
+      - security_groups                      = [
+          - "default",
+        ] -> null
+      - source_dest_check                    = true -> null
+      - subnet_id                            = "subnet-04e329862f78a9fd2" -> null
+      - tags                                 = {
+          - "Name" = "terraform-hello-world"
+        } -> null
+      - tags_all                             = {
+          - "Name" = "terraform-hello-world"
+        } -> null
+      - tenancy                              = "default" -> null
+      - user_data_replace_on_change          = false -> null
+      - vpc_security_group_ids               = [
+          - "sg-0d1fff1c7e64a5cfe",
+        ] -> null
+
+      - capacity_reservation_specification {
+          - capacity_reservation_preference = "open" -> null
+        }
+
+      - credit_specification {
+          - cpu_credits = "standard" -> null
+        }
+
+      - enclave_options {
+          - enabled = false -> null
+        }
+
+      - maintenance_options {
+          - auto_recovery = "default" -> null
+        }
+
+      - metadata_options {
+          - http_endpoint               = "enabled" -> null
+          - http_put_response_hop_limit = 1 -> null
+          - http_tokens                 = "optional" -> null
+          - instance_metadata_tags      = "disabled" -> null
+        }
+
+      - root_block_device {
+          - delete_on_termination = true -> null
+          - device_name           = "/dev/xvda" -> null
+          - encrypted             = false -> null
+          - iops                  = 100 -> null
+          - tags                  = {} -> null
+          - throughput            = 0 -> null
+          - volume_id             = "vol-01852603e8989908b" -> null
+          - volume_size           = 8 -> null
+          - volume_type           = "gp2" -> null
+        }
+    }
+
+Plan: 0 to add, 0 to change, 1 to destroy.
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value:
+```
+
+Após a confirmação com `yes`:
+
+```
+aws_instance.ec2_tf_hello-world: Destroying... [id=i-0e48e99596d5ec5e5]
+aws_instance.ec2_tf_hello-world: Still destroying... [id=i-0e48e99596d5ec5e5, 10s elapsed]
+aws_instance.ec2_tf_hello-world: Still destroying... [id=i-0e48e99596d5ec5e5, 20s elapsed]
+aws_instance.ec2_tf_hello-world: Still destroying... [id=i-0e48e99596d5ec5e5, 30s elapsed]
+aws_instance.ec2_tf_hello-world: Destruction complete after 30s
+
+Destroy complete! Resources: 1 destroyed.
+```
+
+Outra maneira de fazer isso é comentando ou excluindo a declaração do recurso e efetuando o `apply`.
