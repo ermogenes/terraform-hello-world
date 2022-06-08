@@ -194,3 +194,73 @@ aws_instance.ec2_tf_hello-world: Creation complete after 54s [id=i-0e48e99596d5e
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
+
+Ao refazer o `plan`, veja que nada precisa mais ser alterado:
+
+```
+aws_instance.ec2_tf_hello-world: Refreshing state... [id=i-0e48e99596d5ec5e5]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+```
+
+Caso repita o comando `apply`, os recursos já existem e não serão recriados.
+
+```
+aws_instance.ec2_tf_hello-world: Refreshing state... [id=i-0e48e99596d5ec5e5]
+
+No changes. Your infrastructure matches the configuration.
+
+Terraform has compared your real infrastructure against your configuration and found no differences, so no changes are needed.
+
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+```
+`
+## Modificando o recurso
+
+Vamos adicionar uma tag ao recurso:
+
+```
+    tags = {
+      Name = "terraform-hello-world"
+    }
+```
+
+Ao executar o `plan`, ele detecta a modificação.
+
+```
+aws_instance.ec2_tf_hello-world: Refreshing state... [id=i-0e48e99596d5ec5e5]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+Terraform will perform the following actions:
+
+  # aws_instance.ec2_tf_hello-world will be updated in-place        
+  ~ resource "aws_instance" "ec2_tf_hello-world" {
+        id                                   = "i-0e48e99596d5ec5e5"
+      ~ tags                                 = {
+          + "Name" = "terraform-hello-world"
+        }
+      ~ tags_all                             = {
+          + "Name" = "terraform-hello-world"
+        }
+        # (28 unchanged attributes hidden)
+
+        # (6 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
+```
+
+Ao fazer o `apply` e confirmar com `yes`, a tag é criada.
+
+```
+aws_instance.ec2_tf_hello-world: Modifying... [id=i-0e48e99596d5ec5e5]
+aws_instance.ec2_tf_hello-world: Modifications complete after 2s [id=i-0e48e99596d5ec5e5]
+
+Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
+```
+
+A tag `Name` representa o nome do recurso para exibição no AWS Console.
